@@ -1,0 +1,18 @@
+{
+  "destination": "Accessible classroom entrance",
+  "requester": "wheelchair-using student",
+  "routes": [
+    {
+      "id": "main-corridor",
+      "name": "Main corridor route",
+      "priority": 1,
+      "instruction": "Pass the red bin, then turn right and stop at the blue barrel."
+    },
+    {
+      "id": "side-corridor",
+      "name": "Approved side corridor route",
+      "priority": 2,
+      "instruction": "Take the approved side corridor, pass the fire extinguisher, then turn right and stop at the blue barrel."
+    }
+  ]
+}

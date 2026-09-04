@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 132" role="img" aria-labelledby="title desc">
+  <title id="title">ORCA_VLN</title>
+  <desc id="desc">ORCA visual-language navigation wordmark</desc>
+  <defs>
+    <linearGradient id="wordmark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#102a56"/>
+      <stop offset="0.42" stop-color="#1359ae"/>
+      <stop offset="0.72" stop-color="#1676d4"/>
+      <stop offset="1" stop-color="#1684e8"/>
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#12366f"/>
+      <stop offset="0.58" stop-color="#1464c1"/>
+      <stop offset="1" stop-color="#1684e8"/>
+    </linearGradient>
+  </defs>
+  <text x="360" y="75" text-anchor="middle" fill="url(#wordmark)" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="800" letter-spacing="5">ORCA VLN</text>
+  <path d="M112 102 H287 C322 102 334 116 360 116 H594" fill="none" stroke="url(#route)" stroke-linecap="round" stroke-width="5"/>
+  <circle cx="112" cy="102" r="7" fill="#fff" stroke="#0b2c63" stroke-width="4"/>
+  <circle cx="594" cy="116" r="7" fill="#1684e8"/>
+  <path d="M609 116 l-12 -8 v16 z" fill="#1684e8"/>
+</svg>

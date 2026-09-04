@@ -1,0 +1,16 @@
+{
+  "episode_id": "vln-presentation-factory-001",
+  "scene_id": "VLN_Presentation",
+  "instruction": "Walk toward the red waste bin and pass close by it without stopping. Continue toward the blue barrels and pass them. Then turn right and follow the open aisle beside the white safety fence toward the red fire extinguisher. Keep outside the fenced work cell and avoid the boxes. When the white industrial robotic arm mounted on a gray pedestal is visible, approach the open floor directly in front of the pedestal. Stop about 1.5 meters away from the arm.",
+  "start_position": [0.0, 0.0, 0.32],
+  "start_quat_wxyz": [1.0, 0.0, 0.0, 0.0],
+  "goal_position": [2.0, 0.0, 0.32],
+  "goal_radius": 0.6,
+  "reference_path": [[0.0, 0.0, 0.32], [2.0, 0.0, 0.32]],
+  "gt_locations": [[0.0, 0.0, 0.32], [2.0, 0.0, 0.32]],
+  "metadata": {
+    "global_settings": "../../factory.json",
+    "scene_type": "OrcaLab VLN_Presentation factory scene",
+    "route_verification": "The live runner anchors to the authored Go2 scene. Verify the red-bin, blue-barrel, safety-fence, red-fire-extinguisher, and final white-industrial-arm sequence from ego RGB and the recorded action trace; factory.json remains the global settings layout and does not contain a calibrated global pose for that scene-owned arm."
+  }
+}
