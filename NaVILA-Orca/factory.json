@@ -1,0 +1,1826 @@
+{
+    "version": "3.0",
+    "viewport_camera_transform": {
+        "position": [
+            -0.19132697582244873,
+            9.026653289794922,
+            6.894167900085449
+        ],
+        "rotation": [
+            0.32884808607429045,
+            -0.15210772695835573,
+            0.39128764550743594,
+            -0.8459409873969257
+        ]
+    },
+    "actors": [
+        {
+            "name": "Group",
+            "path": "/Group",
+            "type": "GroupActor",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": 1.0
+            },
+            "children": [
+                {
+                    "name": "Static",
+                    "path": "/Group/Static",
+                    "type": "GroupActor",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": 1.0
+                    },
+                    "children": [
+                        {
+                            "name": "FireExtinguisher",
+                            "path": "/Group/Static/FireExtinguisher",
+                            "type": "GroupActor",
+                            "transform": {
+                                "position": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": 1.0
+                            },
+                            "children": [
+                                {
+                                    "name": "FireExtinguisher_01",
+                                    "path": "/Group/Static/FireExtinguisher/FireExtinguisher_01",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            4.240462779998779,
+                                            10.386143684387209,
+                                            0.4358491003513336
+                                        ],
+                                        "rotation": [
+                                            0.327341811145162,
+                                            0.0,
+                                            0.0,
+                                            -0.9449059946239123
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/fire_extinguisher/fireextinguisher_01"
+                                },
+                                {
+                                    "name": "FireExtinguisher_01_1",
+                                    "path": "/Group/Static/FireExtinguisher/FireExtinguisher_01_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.7633860111236577,
+                                            10.423151016235352,
+                                            0.18290485441684723
+                                        ],
+                                        "rotation": [
+                                            0.06038727784026951,
+                                            0.44689325580438266,
+                                            -0.5479840013459116,
+                                            -0.7045234764438474
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/fire_extinguisher/fireextinguisher_01"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CoolingRib",
+                            "path": "/Group/Static/CoolingRib",
+                            "type": "GroupActor",
+                            "transform": {
+                                "position": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": 1.0
+                            },
+                            "children": [
+                                {
+                                    "name": "CoolingRib_01_D",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_D",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            7.696183681488037,
+                                            12.33553695678711,
+                                            1.2999999523162842
+                                        ],
+                                        "rotation": [
+                                            0.8031354100870378,
+                                            0.0,
+                                            0.0,
+                                            -0.5957965366333761
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_d"
+                                },
+                                {
+                                    "name": "CoolingRib_01_B",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_B",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.281548500061035,
+                                            8.5595121383667,
+                                            1.2999999523162842
+                                        ],
+                                        "rotation": [
+                                            0.6360924202625906,
+                                            0.0,
+                                            0.0,
+                                            -0.7716128776041
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_b"
+                                },
+                                {
+                                    "name": "CoolingRib_01_A",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_A",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            7.6908488273620605,
+                                            12.345911026000977,
+                                            2.86102294921875e-06
+                                        ],
+                                        "rotation": [
+                                            0.5991505294937896,
+                                            0.0,
+                                            0.0,
+                                            0.8006363987524623
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_a"
+                                },
+                                {
+                                    "name": "CoolingRib_01_A_2",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_A_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.938568115234375,
+                                            9.375001907348633,
+                                            2.86102294921875e-06
+                                        ],
+                                        "rotation": [
+                                            0.8593607529112378,
+                                            0.0,
+                                            0.0,
+                                            -0.5113698234700895
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_a",
+                                    "entity_overrides": [
+                                        {
+                                            "entity_path": [],
+                                            "group_overrids": [
+                                                {
+                                                    "type_id": "{22B10178-39B6-4C12-BB37-77DB45FDD3B6}",
+                                                    "type_index": 0,
+                                                    "property_overrides": [
+                                                        {
+                                                            "name": "rotate.z",
+                                                            "value": -61.510250091552734,
+                                                            "type": "float"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "CoolingRib_01_A_3",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_A_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            9.017301559448242,
+                                            9.2853364944458,
+                                            2.86102294921875e-06
+                                        ],
+                                        "rotation": [
+                                            0.9192302672801475,
+                                            0.0,
+                                            0.0,
+                                            0.39372035217406376
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_a"
+                                },
+                                {
+                                    "name": "CoolingRib_01_A_1",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_A_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.228273391723633,
+                                            8.28006649017334,
+                                            2.86102294921875e-06
+                                        ],
+                                        "rotation": [
+                                            0.638153832005474,
+                                            0.0,
+                                            0.0,
+                                            -0.7699088820741902
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_a"
+                                },
+                                {
+                                    "name": "CoolingRib_01_D_1",
+                                    "path": "/Group/Static/CoolingRib/CoolingRib_01_D_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.164615631103516,
+                                            10.79971694946289,
+                                            1.2999999523162842
+                                        ],
+                                        "rotation": [
+                                            0.8595279549987909,
+                                            0.0,
+                                            0.0,
+                                            -0.5110887345418568
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_d"
+                                },
+                                {
+                                    "name": "metal_grille_vent_panel_1",
+                                    "path": "/Group/Static/CoolingRib/metal_grille_vent_panel_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            9.00730037689209,
+                                            9.274371147155762,
+                                            1.2999999523162842
+                                        ],
+                                        "rotation": [
+                                            0.3777322684700917,
+                                            0.0,
+                                            0.0,
+                                            -0.925914862909349
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/coolingrib_01/coolingrib_01_c"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Others",
+                            "path": "/Group/Static/Others",
+                            "type": "GroupActor",
+                            "transform": {
+                                "position": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": 1.0
+                            },
+                            "children": [
+                                {
+                                    "name": "RackPile_Covered_01",
+                                    "path": "/Group/Static/Others/RackPile_Covered_01",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.5839130878448486,
+                                            10.978534698486328,
+                                            7.152557373046875e-07
+                                        ],
+                                        "rotation": [
+                                            0.9991237421782287,
+                                            0.0,
+                                            0.0,
+                                            -0.04185388650737689
+                                        ],
+                                        "scale": 3.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/rackpile/rackpile_covered_01"
+                                },
+                                {
+                                    "name": "Barrel_Silver",
+                                    "path": "/Group/Static/Others/Barrel_Silver",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            1.1326696872711182,
+                                            9.934194564819336,
+                                            1.3113021850585938e-06
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/barrel_silver/barrel_silver"
+                                },
+                                {
+                                    "name": "Barrel_Blue_01",
+                                    "path": "/Group/Static/Others/Barrel_Blue_01",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            0.08841446042060852,
+                                            10.734683990478516,
+                                            -1.1920928955078125e-07
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/barrel_blue_01/barrel_blue_01"
+                                },
+                                {
+                                    "name": "Barrel_Blue_01_1",
+                                    "path": "/Group/Static/Others/Barrel_Blue_01_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.9655145406723022,
+                                            8.970646858215332,
+                                            -1.1920928955078125e-07
+                                        ],
+                                        "rotation": [
+                                            0.9813735403603292,
+                                            0.0,
+                                            0.0,
+                                            0.192109276924966
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/barrel_blue_01/barrel_blue_01"
+                                },
+                                {
+                                    "name": "Barrel_Blue_01_2",
+                                    "path": "/Group/Static/Others/Barrel_Blue_01_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            0.9490727782249452,
+                                            10.329195022583008,
+                                            0.2893495559692383
+                                        ],
+                                        "rotation": [
+                                            0.6899878411853744,
+                                            0.033006756332589315,
+                                            -0.706337860421026,
+                                            0.15464203823215344
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/barrel_blue_01/barrel_blue_01"
+                                },
+                                {
+                                    "name": "Barrel_Silver_1",
+                                    "path": "/Group/Static/Others/Barrel_Silver_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.5337381362915039,
+                                            9.250185012817385,
+                                            1.3113021850585938e-06
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/barrel_silver/barrel_silver"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_A",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_A",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -2.152975082397461,
+                                            9.02161979675293,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_a"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_B",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_B",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.6338282227516174,
+                                            11.989410400390623,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_b"
+                                },
+                                {
+                                    "name": "Shelf_FoamPlate",
+                                    "path": "/Group/Static/Others/Shelf_FoamPlate",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            5.085455894470215,
+                                            12.080156326293944,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.9981285291843564,
+                                            0.0,
+                                            0.0,
+                                            0.06115095443468932
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/foamplate/shelf_foamplate"
+                                },
+                                {
+                                    "name": "Partition_01_b",
+                                    "path": "/Group/Static/Others/Partition_01_b",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.40490078926086426,
+                                            -0.38236844539642334,
+                                            5.960464477539065e-08
+                                        ],
+                                        "rotation": [
+                                            0.6408708681333397,
+                                            0.0,
+                                            0.0,
+                                            0.7676487024531595
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_01/partition_01_b"
+                                },
+                                {
+                                    "name": "Partition_02",
+                                    "path": "/Group/Static/Others/Partition_02",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.063415050506592,
+                                            7.084588527679443,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.7295940787286513,
+                                            0.0,
+                                            0.0,
+                                            0.6838804575977372
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_02/partition_02"
+                                },
+                                {
+                                    "name": "Partition_02_1",
+                                    "path": "/Group/Static/Others/Partition_02_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            5.536890029907227,
+                                            6.963367938995361,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.7000518938830049,
+                                            0.0,
+                                            0.0,
+                                            0.7140919729774435
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_02/partition_02"
+                                },
+                                {
+                                    "name": "Partition_01_b_1",
+                                    "path": "/Group/Static/Others/Partition_01_b_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.170509099960327,
+                                            -0.22189825773239136,
+                                            5.960464477539065e-08
+                                        ],
+                                        "rotation": [
+                                            0.5576462092005412,
+                                            0.0,
+                                            0.0,
+                                            0.8300787344368402
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_01/partition_01_b"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_B_1",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_B_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -4.58638858795166,
+                                            11.989410400390623,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_b"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_B_2",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_B_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.2972187995910645,
+                                            11.989410400390623,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_b"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_A_1",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_A_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -3.6667747497558594,
+                                            10.302397727966309,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.5623987672891488,
+                                            0.0,
+                                            0.0,
+                                            0.8268661479052374
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_a"
+                                },
+                                {
+                                    "name": "Partition_01_b_2",
+                                    "path": "/Group/Static/Others/Partition_01_b_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            0.905024528503418,
+                                            -0.3823695778846741,
+                                            5.960464477539065e-08
+                                        ],
+                                        "rotation": [
+                                            0.7537559540445555,
+                                            0.0,
+                                            0.0,
+                                            0.657154442838502
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_01/partition_01_b"
+                                },
+                                {
+                                    "name": "Shelf_FoamPlate_1",
+                                    "path": "/Group/Static/Others/Shelf_FoamPlate_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            6.6861066818237305,
+                                            12.385431289672852,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.9903779566377374,
+                                            0.0,
+                                            0.0,
+                                            0.13838895550606564
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/foamplate/shelf_foamplate"
+                                },
+                                {
+                                    "name": "Partition_02_2",
+                                    "path": "/Group/Static/Others/Partition_02_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            4.305215358734131,
+                                            7.01321268081665,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.6975202424755184,
+                                            0.0,
+                                            0.0,
+                                            0.7165650782286938
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_02/partition_02"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_B_3",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_B_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -2.605646848678589,
+                                            11.989410400390623,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_b"
+                                },
+                                {
+                                    "name": "Partition_02_3",
+                                    "path": "/Group/Static/Others/Partition_02_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            6.773443698883057,
+                                            7.087884426116943,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            0.6945263658112951,
+                                            0.0,
+                                            0.0,
+                                            0.7194672523422835
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_02/partition_02"
+                                },
+                                {
+                                    "name": "Conveyor_Workbench_B_4",
+                                    "path": "/Group/Static/Others/Conveyor_Workbench_B_4",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            1.3367843627929688,
+                                            11.989410400390623,
+                                            0.0
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/conveyor_workbench/conveyor_workbench_b"
+                                },
+                                {
+                                    "name": "Computer",
+                                    "path": "/Group/Static/Others/Computer",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.672741889953613,
+                                            7.705207824707031,
+                                            1.0292706489562988
+                                        ],
+                                        "rotation": [
+                                            0.32253057243111627,
+                                            0.0,
+                                            0.0,
+                                            0.9465590472058553
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/computer/computer"
+                                },
+                                {
+                                    "name": "Workbench_01",
+                                    "path": "/Group/Static/Others/Workbench_01",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            8.380417823791504,
+                                            7.293951511383057,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.32253057243111627,
+                                            0.0,
+                                            0.0,
+                                            0.9465590472058553
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/workbench_01/workbench_01"
+                                },
+                                {
+                                    "name": "Partition_01_b_3",
+                                    "path": "/Group/Static/Others/Partition_01_b_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.1464312076568604,
+                                            0.5759788155555725,
+                                            5.960464477539065e-08
+                                        ],
+                                        "rotation": [
+                                            0.3011835172970461,
+                                            0.0,
+                                            0.0,
+                                            0.9535661953470141
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/industry_workshop_transport_02/prop/partition_01/partition_01_b"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CardBox",
+                            "path": "/Group/Static/CardBox",
+                            "type": "GroupActor",
+                            "transform": {
+                                "position": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": 1.0
+                            },
+                            "children": [
+                                {
+                                    "name": "CardBox_02_Static",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.1769514083862305,
+                                            3.167229652404785,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_03_Static",
+                                    "path": "/Group/Static/CardBox/CardBox_03_Static",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3321645259857178,
+                                            0.944408655166626,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.721501896229439,
+                                            0.0,
+                                            0.0,
+                                            -0.6924124592591642
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_03_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3215495347976685,
+                                            5.112801551818848,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_1",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.267195224761963,
+                                            4.269736289978027,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.0771166815537231,
+                                            0.0,
+                                            0.0,
+                                            -0.9970220746935053
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_03_Static_1",
+                                    "path": "/Group/Static/CardBox/CardBox_03_Static_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3229361772537231,
+                                            -0.15655571222305298,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_03_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_1",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_1",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.7939574122428894,
+                                            4.097476005554199,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6823941814119101,
+                                            0.0,
+                                            0.0,
+                                            0.7309843918820491
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_2",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.195627212524414,
+                                            7.266140937805176,
+                                            1.0024018287658691
+                                        ],
+                                        "rotation": [
+                                            0.9975339872393415,
+                                            0.0,
+                                            0.0,
+                                            -0.07018507179152343
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_2",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.1721315383911133,
+                                            7.041862964630127,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_3",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.7939580678939819,
+                                            3.35947585105896,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.705665279254454,
+                                            0.0,
+                                            0.0,
+                                            -0.7085453504573532
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_3",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.1822749376296997,
+                                            4.844680309295654,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.9975339872393415,
+                                            0.0,
+                                            0.0,
+                                            -0.07018507179152343
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_4",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_4",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.470545530319214,
+                                            5.838883399963379,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_5",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_5",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.693140745162964,
+                                            2.131113290786743,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6835619790015839,
+                                            0.0,
+                                            0.0,
+                                            0.7298924721241056
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_6",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_6",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3215513229370115,
+                                            2.977898597717285,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_7",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_7",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.221516251564026,
+                                            2.2727010250091553,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7006615271297194,
+                                            0.0,
+                                            0.0,
+                                            0.7134938152501741
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_03_Static_2",
+                                    "path": "/Group/Static/CardBox/CardBox_03_Static_2",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.8912816047668457,
+                                            0.9404412508010864,
+                                            1.0205478247371502e-05
+                                        ],
+                                        "rotation": [
+                                            0.9994907776363432,
+                                            -9.409559579676601e-05,
+                                            -1.858265595617743e-05,
+                                            -0.03190887369685342
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_03_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_8",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_8",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.9103050231933594,
+                                            2.9085781574249268,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7785105144754919,
+                                            0.0,
+                                            0.0,
+                                            0.6276315629819018
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_4",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_4",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.195627212524414,
+                                            7.266140937805176,
+                                            0.5015124082565308
+                                        ],
+                                        "rotation": [
+                                            0.7297332552321809,
+                                            0.0,
+                                            0.0,
+                                            0.6837319476287799
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_9",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_9",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3215501308441162,
+                                            1.554152011871338,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6835619790015839,
+                                            0.0,
+                                            0.0,
+                                            0.7298924721241056
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_10",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_10",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.9364761114120485,
+                                            6.598719120025635,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_11",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_11",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.9162087440490723,
+                                            4.013125419616699,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6606648950243781,
+                                            0.0,
+                                            0.0,
+                                            -0.7506809551883059
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_03_Static_3",
+                                    "path": "/Group/Static/CardBox/CardBox_03_Static_3",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.0417256355285645,
+                                            1.51114022731781,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            1.0,
+                                            0.0,
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_03_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_5",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_5",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            4.385857582092285,
+                                            7.6130571365356445,
+                                            0.0019771773368120193
+                                        ],
+                                        "rotation": [
+                                            0.9975339872393415,
+                                            0.0,
+                                            0.0,
+                                            -0.07018507179152343
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_6",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_6",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.2085719108581543,
+                                            5.681938648223877,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.029061381566595747,
+                                            0.0,
+                                            0.0,
+                                            -0.9995776288520271
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_7",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_7",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.038704514503479,
+                                            3.6971867084503174,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.712107823279612,
+                                            0.0,
+                                            0.0,
+                                            -0.7020701161735721
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_03_Static_4",
+                                    "path": "/Group/Static/CardBox/CardBox_03_Static_4",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.2848681211471558,
+                                            0.3996080160140991,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.0252303756202911,
+                                            1.3177972601423442e-05,
+                                            -9.500337677891492e-05,
+                                            -0.9996816588028202
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_03_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_8",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_8",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.202064037322998,
+                                            4.473793029785156,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.9943578560964305,
+                                            0.0,
+                                            0.0,
+                                            -0.10607758490515606
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_12",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_12",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.8999545574188232,
+                                            4.790923118591309,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6984491067105582,
+                                            0.0,
+                                            0.0,
+                                            0.7156597273392037
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_13",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_13",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.9364767670631408,
+                                            5.867191314697266,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_14",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_14",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.470544815063477,
+                                            5.120333671569824,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_22",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_22",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            9.028546333312988,
+                                            8.379754066467285,
+                                            -2.2351741790771484e-07
+                                        ],
+                                        "rotation": [
+                                            0.8000221437732833,
+                                            0.0,
+                                            0.0,
+                                            -0.5999704738338378
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_15",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_15",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.3215501308441162,
+                                            4.394252300262451,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_16",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_16",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.4705443382263184,
+                                            4.408699989318848,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_17",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_17",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -0.7939567565917969,
+                                            4.854284763336182,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.6972916369793104,
+                                            0.0,
+                                            0.0,
+                                            -0.7167875368606192
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_18",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_18",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.47054386138916,
+                                            3.7039802074432377,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_19",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_19",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            2.9055967330932617,
+                                            5.619192123413086,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7207952206170929,
+                                            0.0,
+                                            0.0,
+                                            -0.6931480721574261
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_9",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_9",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.0748820304870605,
+                                            5.091087341308594,
+                                            0.4969995617866516
+                                        ],
+                                        "rotation": [
+                                            0.7223898361838934,
+                                            0.0,
+                                            0.0,
+                                            0.6914860263072621
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_10",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_10",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.0021357536315918,
+                                            7.793121337890625,
+                                            0.0006466954946517944
+                                        ],
+                                        "rotation": [
+                                            0.9993430090244408,
+                                            0.0,
+                                            0.0,
+                                            0.03624293467665577
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_20",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_20",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.2574310302734375,
+                                            6.5869669914245605,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.9996268931469128,
+                                            0.0,
+                                            0.0,
+                                            0.027314364306179447
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_11",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_11",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            4.385857582092285,
+                                            7.6130571365356445,
+                                            0.5016961693763733
+                                        ],
+                                        "rotation": [
+                                            0.7297332552321809,
+                                            0.0,
+                                            0.0,
+                                            0.6837319476287799
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_01_Static_21",
+                                    "path": "/Group/Static/CardBox/CardBox_01_Static_21",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.321550726890564,
+                                            3.682618141174317,
+                                            -2.384185791015625e-07
+                                        ],
+                                        "rotation": [
+                                            0.7071071107358423,
+                                            0.0,
+                                            0.0,
+                                            0.7071064516370992
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_01_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_12",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_12",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            -1.195627212524414,
+                                            7.266140937805176,
+                                            0.0006466954946517944
+                                        ],
+                                        "rotation": [
+                                            0.9975339872393415,
+                                            0.0,
+                                            0.0,
+                                            -0.07018507179152343
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_13",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_13",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.8232767581939697,
+                                            7.935881614685059,
+                                            0.0019771773368120193
+                                        ],
+                                        "rotation": [
+                                            0.9995614960329086,
+                                            0.0,
+                                            0.0,
+                                            0.029611073071636768
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                },
+                                {
+                                    "name": "CardBox_02_Static_14",
+                                    "path": "/Group/Static/CardBox/CardBox_02_Static_14",
+                                    "type": "AssetActor",
+                                    "transform": {
+                                        "position": [
+                                            3.496809244155884,
+                                            7.37049674987793,
+                                            0.0019771773368120193
+                                        ],
+                                        "rotation": [
+                                            0.6896707266940961,
+                                            0.0,
+                                            0.0,
+                                            -0.7241231171156168
+                                        ],
+                                        "scale": 1.0
+                                    },
+                                    "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/prop/cardbox/cardbox_02_static"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Remy_liedown",
+                            "path": "/Group/Static/Remy_liedown",
+                            "type": "AssetActor",
+                            "transform": {
+                                "position": [
+                                    3.057975053787231,
+                                    7.955383777618408,
+                                    0.04323212802410126
+                                ],
+                                "rotation": [
+                                    0.9703104703628884,
+                                    0.0,
+                                    0.0,
+                                    -0.24186275261840168
+                                ],
+                                "scale": 1.0
+                            },
+                            "asset_path": "assets/e071469a36d3c8aa/vln_presentation/waic/remy_liedown/remy_liedown"
+                        }
+                    ]
+                },
+                {
+                    "name": "Interactive",
+                    "path": "/Group/Interactive",
+                    "type": "GroupActor",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": 1.0
+                    },
+                    "children": [
+                        {
+                            "name": "Bin",
+                            "path": "/Group/Interactive/Bin",
+                            "type": "AssetActor",
+                            "transform": {
+                                "position": [
+                                    0.8006011843681335,
+                                    3.163637161254883,
+                                    -1.1920928955078125e-07
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": 1.0
+                            },
+                            "asset_path": "assets/e071469a36d3c8aa/vln_presentation/simple_case_0119/bin/bin"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "quadruped_robot_1",
+            "path": "/quadruped_robot_1",
+            "type": "AssetActor",
+            "transform": {
+                "position": [
+                    0.047792792320251465,
+                    0.8324360847473145,
+                    -7.450580152834618e-09
+                ],
+                "rotation": [
+                    0.7301523186696985,
+                    0.0,
+                    0.0,
+                    0.6832844148239174
+                ],
+                "scale": 1.0
+            },
+            "asset_path": "assets/e071469a36d3c8aa/unitree_robots/prefabs/go2_usda",
+            "entity_overrides": [
+                {
+                    "entity_path": [],
+                    "group_overrids": [
+                        {
+                            "type_id": "{22B10178-39B6-4C12-BB37-77DB45FDD3B6}",
+                            "type_index": 0,
+                            "property_overrides": [
+                                {
+                                    "name": "translate.x",
+                                    "value": 0.047792792320251465,
+                                    "type": "float"
+                                },
+                                {
+                                    "name": "translate.y",
+                                    "value": 0.8324360847473145,
+                                    "type": "float"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
