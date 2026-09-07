@@ -1,0 +1,122 @@
+{
+  "map_id": "example-campus-live-guide",
+  "metadata": {
+    "data_status": "synthetic_not_surveyed",
+    "purpose": "representative live-guidance fixture only"
+  },
+  "nodes": [
+    {"id": "north-gate", "name": "North gate"},
+    {"id": "student-hub", "name": "Student hub"},
+    {"id": "covered-walkway", "name": "Covered walkway"},
+    {"id": "lift-lobby", "name": "Lift lobby"},
+    {"id": "stairs", "name": "Stairs"},
+    {"id": "service-passage", "name": "Service passage"},
+    {"id": "seminar-room-2", "name": "Seminar room 2"}
+  ],
+  "edges": [
+    {
+      "id": "service-shortcut",
+      "start": "north-gate",
+      "end": "seminar-room-2",
+      "distance_m": 3.0,
+      "instruction": "Do not use this service-only robot passage for person guidance.",
+      "robot_passable": true,
+      "person_passable": false,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.0,
+      "surface": "smooth"
+    },
+    {
+      "id": "gate-to-stairs",
+      "start": "north-gate",
+      "end": "stairs",
+      "distance_m": 2.0,
+      "instruction": "Continue to the stairs.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": false,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.0,
+      "surface": "smooth"
+    },
+    {
+      "id": "stairs-to-seminar",
+      "start": "stairs",
+      "end": "seminar-room-2",
+      "distance_m": 3.0,
+      "instruction": "Continue from the stairs to seminar room 2.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": false,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.0,
+      "surface": "smooth"
+    },
+    {
+      "id": "gate-to-hub",
+      "start": "north-gate",
+      "end": "student-hub",
+      "distance_m": 6.0,
+      "instruction": "Continue from the north gate to the student hub entrance.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.03,
+      "surface": "smooth"
+    },
+    {
+      "id": "hub-to-lift",
+      "start": "student-hub",
+      "end": "lift-lobby",
+      "distance_m": 4.0,
+      "instruction": "Pass through the student hub and stop at the lift lobby.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.03,
+      "surface": "smooth"
+    },
+    {
+      "id": "gate-to-covered-walkway",
+      "start": "north-gate",
+      "end": "covered-walkway",
+      "distance_m": 8.0,
+      "instruction": "Turn toward the covered walkway and continue to its junction.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.04,
+      "surface": "smooth"
+    },
+    {
+      "id": "covered-walkway-to-lift",
+      "start": "covered-walkway",
+      "end": "lift-lobby",
+      "distance_m": 8.0,
+      "instruction": "Follow the covered walkway to the lift lobby.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.04,
+      "surface": "smooth"
+    },
+    {
+      "id": "lift-to-seminar",
+      "start": "lift-lobby",
+      "end": "seminar-room-2",
+      "distance_m": 5.0,
+      "instruction": "Leave the lift lobby and continue to seminar room 2.",
+      "robot_passable": true,
+      "person_passable": true,
+      "step_free": true,
+      "clear_width_m": 1.0,
+      "slope_ratio": 0.02,
+      "surface": "smooth"
+    }
+  ]
+}

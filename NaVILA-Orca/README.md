@@ -2,6 +2,10 @@
 
 # Orca_VLN developer kit
 
+The minimal JalanLens product domain and safety boundary are documented in
+[Live Campus Guide core](docs/LIVE_GUIDE.md). The legacy NaVILA/Orca runtime
+below remains available for simulator integration.
+
 This directory is the distributable OrcaLab runtime. Its GitHub project homepage is one level up: [Orca_VLN](../README.md).
 
 Choose exactly one deployment option:

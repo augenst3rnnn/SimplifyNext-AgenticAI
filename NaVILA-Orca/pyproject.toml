@@ -38,6 +38,7 @@ where = ["src"]
 [tool.setuptools.package-data]
 navila_orca = [
   "assets/checkpoints/*.pt",
+  "live_guide/fixtures/*.json",
   "go2_task/assets/robots/unitree_go2/xmls/*.xml",
   "go2_task/assets/robots/unitree_go2/xmls/assets/*.obj",
 ]
