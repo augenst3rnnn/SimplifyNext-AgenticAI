@@ -117,7 +117,8 @@ def test_runner_executes_exact_ticks_samples_history_and_stops_normally():
     assert result.metrics["success"] == 1.0
     assert result.metrics["spl"] == pytest.approx(1.0)
     assert result.metrics["path_length"] == pytest.approx(0.75)
-    assert physics.command_updates == 2
+    assert physics.command_updates == 3  # Two actions and the final zero command.
+    assert physics.command.vx == physics.command.wz == 0.0
     assert len(result.motion_chunks) == 2
     forward, turn = result.motion_chunks
     assert forward.target_distance_m == pytest.approx(0.75)
@@ -218,8 +219,9 @@ def test_runner_treats_intermediate_waypoint_stops_as_stage_completion():
         "Waypoint 3 of 3. Reach the yellow truck, then stop.",
         "Waypoint 3 of 3. Reach the yellow truck, then stop.",
     ]
-    # Two intermediate zero commands plus three forward commands.
-    assert physics.command_updates == 5
+    # Two intermediate zero commands, three forward commands, final stop.
+    assert physics.command_updates == 6
+    assert physics.command.vx == physics.command.wz == 0.0
 
 
 def test_runner_rejects_consecutive_stop_after_waypoint_switch():

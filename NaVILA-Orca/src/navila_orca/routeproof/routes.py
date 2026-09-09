@@ -13,7 +13,7 @@ class ApprovedRoute:
     """One accessibility-team-approved route and its NaVILA instruction."""
 
     route_id: str
-    instruction: str
+    instruction: str = ""
     priority: int = 0
     display_name: str = ""
     metadata: Mapping[str, Any] = field(default_factory=dict)
@@ -23,8 +23,6 @@ class ApprovedRoute:
         instruction = str(self.instruction).strip()
         if not route_id:
             raise ValueError("route_id must not be empty")
-        if not instruction:
-            raise ValueError(f"instruction for route {route_id!r} must not be empty")
         object.__setattr__(self, "route_id", route_id)
         object.__setattr__(self, "instruction", instruction)
         object.__setattr__(self, "priority", int(self.priority))
@@ -55,7 +53,7 @@ class RoutePlan:
         object.__setattr__(self, "metadata", dict(self.metadata))
 
 
-def load_route_plan(path: str | Path) -> RoutePlan:
+def load_route_plan(path: str | Path, *, require_instructions: bool = True) -> RoutePlan:
     """Load and validate a RouteProof JSON route plan."""
 
     route_path = Path(path).expanduser().resolve()
@@ -75,6 +73,8 @@ def load_route_plan(path: str | Path) -> RoutePlan:
     for index, value in enumerate(route_values):
         if not isinstance(value, dict):
             raise ValueError(f"route {index + 1} must be a JSON object")
+        if require_instructions and not str(value.get("instruction", "")).strip():
+            raise ValueError(f"instruction for route {value.get('id')!r} must not be empty")
         routes.append(
             ApprovedRoute(
                 route_id=value.get("id", ""),

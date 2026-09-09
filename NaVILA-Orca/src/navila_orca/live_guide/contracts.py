@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import math
+from string import Formatter
 from typing import Any, Mapping
 
 
@@ -191,3 +192,78 @@ class MissionLimits:
             if not math.isfinite(value) or value <= 0.0:
                 raise ValueError(f"{name} must be positive and finite")
             object.__setattr__(self, name, value)
+
+
+@dataclass(frozen=True, slots=True)
+class RouteSegment:
+    """Authored local instruction data, independent of robot observations."""
+
+    segment_id: str
+    start_node: str
+    end_node: str
+    landmark: str
+    direction: str
+    instruction_template: str = "{direction} toward {landmark}. Stop at {end_node}."
+
+    def __post_init__(self) -> None:
+        for name in ("segment_id", "start_node", "end_node", "landmark", "direction",
+                     "instruction_template"):
+            if not isinstance(getattr(self, name), str):
+                raise ValueError(f"{name} must be text")
+            object.__setattr__(self, name, _required_text(getattr(self, name), name))
+        allowed = {"start_node", "end_node", "landmark", "direction"}
+        for _, name, spec, conversion in Formatter().parse(self.instruction_template):
+            if name is not None and (name not in allowed or spec or conversion):
+                raise ValueError("instruction template contains an unsupported field")
+
+    def instruction(self) -> str:
+        return self.instruction_template.format(
+            start_node=self.start_node, end_node=self.end_node,
+            landmark=self.landmark, direction=self.direction,
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class GuidedRoute:
+    """An explicit ordered route, never a path inferred by LiveGuide."""
+
+    route_id: str
+    destination: str
+    segments: tuple[RouteSegment, ...]
+    accessibility_metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.route_id, str) or not isinstance(self.destination, str):
+            raise ValueError("route_id and destination must be text")
+        object.__setattr__(self, "route_id", _required_text(self.route_id, "route_id"))
+        object.__setattr__(self, "destination", _required_text(self.destination, "destination"))
+        object.__setattr__(self, "segments", tuple(self.segments))
+        if not self.segments or not all(isinstance(s, RouteSegment) for s in self.segments):
+            raise ValueError("guided route requires structured segments")
+        if len({s.segment_id for s in self.segments}) != len(self.segments):
+            raise ValueError("segment IDs must be unique within a route")
+        if any(a.end_node != b.start_node for a, b in zip(self.segments, self.segments[1:])):
+            raise ValueError("route segments must be contiguous")
+        if self.segments[-1].end_node != self.destination:
+            raise ValueError("last segment must end at the route destination")
+        object.__setattr__(self, "accessibility_metadata", dict(self.accessibility_metadata))
+
+
+@dataclass(frozen=True, slots=True)
+class RouteCatalog:
+    nodes: tuple[RouteNode, ...]
+    routes: tuple[GuidedRoute, ...]
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "nodes", tuple(self.nodes))
+        object.__setattr__(self, "routes", tuple(self.routes))
+        nodes = {node.node_id for node in self.nodes}
+        if not nodes or len(nodes) != len(self.nodes):
+            raise ValueError("catalog requires unique nodes")
+        if not self.routes or len({r.route_id for r in self.routes}) != len(self.routes):
+            raise ValueError("catalog requires unique routes")
+        for route in self.routes:
+            if any(s.start_node not in nodes or s.end_node not in nodes for s in route.segments):
+                raise ValueError("route segment has an unknown endpoint")
+        object.__setattr__(self, "metadata", dict(self.metadata))

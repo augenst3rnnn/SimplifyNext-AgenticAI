@@ -17,6 +17,10 @@ from .planner import (
     WaypointInstruction,
 )
 from .io import load_example_campus_map, load_route_map
+from .io import load_route_catalog
+from .contracts import GuidedRoute, RouteCatalog, RouteSegment
+from .session import ApprovedRouteSession
+from .progress import FlagFileProgressSource, ProgressConfirmation, ProgressRequest, ProgressSource
 from .safety import (
     ActionLimits,
     ActionName,
@@ -30,6 +34,15 @@ from .safety import (
 )
 
 __all__ = [
+    "ApprovedRouteSession",
+    "FlagFileProgressSource",
+    "GuidedRoute",
+    "ProgressConfirmation",
+    "ProgressRequest",
+    "ProgressSource",
+    "RouteCatalog",
+    "RouteSegment",
+    "load_route_catalog",
     "ActionLimits",
     "ActionName",
     "ActionValidation",

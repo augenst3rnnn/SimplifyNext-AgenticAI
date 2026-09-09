@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from navila_orca.cli import (
     ScriptedVLMClient,
@@ -112,3 +113,51 @@ def test_routeproof_routes_replace_the_default_instruction_file():
     assert args.routeproof_routes == "routes.json"
     assert args.instruction_file is None
     assert args.routeproof_blockage_flag == "/tmp/routeproof_blocked"
+
+
+@pytest.mark.parametrize("arguments,expected", [
+    (["--liveguide-catalog", "catalog.json"], "requires --routeproof-routes"),
+    (["--liveguide-progress-flag", "progress.json"], "requires --liveguide-catalog"),
+    (["--liveguide-catalog", "catalog.json", "--liveguide-progress-flag", "progress.json",
+      "--routeproof-routes", "routes.json", "--max-decisions", "0"], "finite positive"),
+    (["--liveguide-catalog", "catalog.json", "--liveguide-progress-flag", "progress.json",
+      "--routeproof-routes", "routes.json", "--publish-scene"], "existing scene"),
+])
+def test_guidance_configuration_fails_before_backend_creation(arguments, expected, tmp_path, capsys):
+    assert main(["run", "--output", str(tmp_path), *arguments]) == 1
+    assert expected in capsys.readouterr().err
+
+
+def test_guided_cli_wires_catalog_and_preserves_single_runtime(tmp_path, monkeypatch):
+    from pathlib import Path
+    from navila_orca import cli
+    from navila_orca.live_guide import ProgressConfirmation
+    from test_routeproof_live_guide import MovingPhysics
+    from test_runner import FakeRenderer
+
+    physics = MovingPhysics()
+    physics.start = lambda: None
+    physics.alignment_report = {}
+    renderer = FakeRenderer()
+    created = []
+    def make_renderer(*args, **kwargs):
+        created.append(True)
+        return renderer, None
+    monkeypatch.setattr(cli, "MjlabGo2Backend", lambda **kwargs: physics)
+    monkeypatch.setattr(cli, "_make_renderer", make_renderer)
+    def confirmation(self, request, **kwargs):
+        kwargs["on_poll"]()
+        assert physics.command.vx == 0
+        return ProgressConfirmation(request, request.request_id, "test operator")
+    monkeypatch.setattr(cli.FlagFileProgressSource, "wait", confirmation)
+    examples = Path(__file__).resolve().parents[1] / "examples"
+    assert main(["run", "--output", str(tmp_path),
+                 "--routeproof-routes", str(examples / "liveguide_routes.json"),
+                 "--liveguide-catalog", str(examples / "liveguide_catalog.json"),
+                 "--liveguide-progress-flag", str(tmp_path / "progress.json"),
+                 "--scripted-action", "stop"]) == 0
+    payload = __import__("json").loads((tmp_path / "measurements.json").read_text())
+    assert payload["routeproof"]["verified_route_id"] == "main-corridor"
+    assert len(payload["routeproof"]["attempts"][0]["segments"]) == 2
+    assert created == [True]
+    assert physics.resets == 1

@@ -42,6 +42,7 @@ from .routeproof import (
     RouteProofAgent,
     load_route_plan,
 )
+from .live_guide import ApprovedRouteSession, FlagFileProgressSource, load_route_catalog
 from .runner import NavigationRunner
 from .training import (
     COMPATIBLE_VERSION_SPECS,
@@ -320,6 +321,15 @@ def _run(args: argparse.Namespace) -> int:
 
     routeproof_agent: RouteProofAgent | None = None
     routeproof_mission = None
+    if args.liveguide_catalog:
+        if not args.routeproof_routes or not args.liveguide_progress_flag:
+            raise ValueError("--liveguide-catalog requires --routeproof-routes and --liveguide-progress-flag")
+        if args.max_decisions <= 0 or args.max_control_steps <= 0:
+            raise ValueError("LiveGuide requires finite positive --max-decisions and --max-control-steps")
+        if args.publish_scene:
+            raise ValueError("LiveGuide uses the existing scene; --publish-scene is not supported")
+    elif args.liveguide_progress_flag:
+        raise ValueError("--liveguide-progress-flag requires --liveguide-catalog")
     if args.routeproof_blockage_flag and not args.routeproof_routes:
         raise ValueError("--routeproof-blockage-flag requires --routeproof-routes")
     if args.routeproof_require_metric_success and not args.routeproof_routes:
@@ -327,7 +337,13 @@ def _run(args: argparse.Namespace) -> int:
             "--routeproof-require-metric-success requires --routeproof-routes"
         )
     if args.routeproof_routes:
-        route_plan = load_route_plan(args.routeproof_routes)
+        route_plan = load_route_plan(args.routeproof_routes, require_instructions=not bool(args.liveguide_catalog))
+        guide = None
+        progress_source = None
+        if args.liveguide_catalog:
+            guide = ApprovedRouteSession(load_route_catalog(args.liveguide_catalog),
+                                         frozenset(route.route_id for route in route_plan.routes))
+            progress_source = FlagFileProgressSource(args.liveguide_progress_flag)
         detector = (
             FlagFileObstructionDetector(args.routeproof_blockage_flag)
             if args.routeproof_blockage_flag
@@ -338,6 +354,9 @@ def _run(args: argparse.Namespace) -> int:
             detector,
             LocalFacilitiesTicketStore(output_dir / "routeproof"),
             require_metric_success=args.routeproof_require_metric_success,
+            guide=guide,
+            progress_source=progress_source,
+            confirmation_timeout_s=args.liveguide_confirmation_timeout,
         )
         instruction_provider = routeproof_agent.current_instruction
 
@@ -483,6 +502,13 @@ def _run(args: argparse.Namespace) -> int:
                 "frame_files": [path.name for path in saved_frames],
                 "pose_pushes": renderer.pose_pushes,
                 "scene_fidelity": scene_fidelity,
+                "liveguide": None if not args.liveguide_catalog else {
+                    "catalog": args.liveguide_catalog,
+                    "progress_source": "explicit operator flag file",
+                    "confirmation_timeout_s": args.liveguide_confirmation_timeout,
+                    "budget_scope": "entire RouteProof mission",
+                    "metrics_scope": "last executed segment; attempts aggregate control counts",
+                },
                 "physics_alignment": backend.alignment_report,
             },
             "limitations": []
@@ -493,6 +519,12 @@ def _run(args: argparse.Namespace) -> int:
             ],
         }
         result_path = output_dir / "measurements.json"
+        if args.liveguide_catalog:
+            payload["limitations"].extend([
+                "Segment entry and completion require explicit operator confirmation; pose does not prove node arrival.",
+                "Obstruction events are manual or always-clear; no autonomous clearance perception is implemented.",
+                "No mid-segment connector is inferred. Confirm an alternate entry only when already at its authored start.",
+            ])
         alignment_path = output_dir / "scene_alignment.json"
         alignment_path.write_text(
             json.dumps(
@@ -677,6 +709,10 @@ def _build_parser() -> argparse.ArgumentParser:
         "--routeproof-blockage-flag",
         help="demo flag; create or modify this file to report one route blockage",
     )
+    run.add_argument("--liveguide-catalog", help="structured topology for RouteProof's approved route IDs")
+    run.add_argument("--liveguide-progress-flag", help="operator-written progress event JSON; no automatic completion")
+    run.add_argument("--liveguide-confirmation-timeout", type=float, default=120.0,
+                     help="maximum seconds to wait stopped for each explicit entry/completion confirmation")
     run.add_argument(
         "--routeproof-require-metric-success",
         action=argparse.BooleanOptionalAction,

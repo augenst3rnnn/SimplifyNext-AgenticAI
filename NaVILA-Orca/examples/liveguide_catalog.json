@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "data_status": "synthetic_not_surveyed",
+    "entry_policy": "Operator must confirm the robot is already at each selected route's start. No connector or scene localization is inferred."
+  },
+  "nodes": [
+    {"id": "junction", "name": "Operator-identified starting junction"},
+    {"id": "red-bin", "name": "Red bin"},
+    {"id": "yellow-crate", "name": "Yellow crate"},
+    {"id": "blue-barrel", "name": "Blue barrel"}
+  ],
+  "routes": [
+    {
+      "id": "main-corridor",
+      "destination": "blue-barrel",
+      "accessibility_metadata": {"data_status": "synthetic_not_surveyed"},
+      "segments": [
+        {"segment_id": "junction-to-bin", "start_node": "junction", "end_node": "red-bin", "landmark": "the red bin", "direction": "Continue forward", "instruction_template": "{direction} to {landmark} and stop beside it."},
+        {"segment_id": "bin-to-barrel", "start_node": "red-bin", "end_node": "blue-barrel", "landmark": "the blue barrel", "direction": "Turn right", "instruction_template": "{direction}, continue to {landmark}, and stop beside it."}
+      ]
+    },
+    {
+      "id": "side-corridor",
+      "destination": "blue-barrel",
+      "accessibility_metadata": {"data_status": "synthetic_not_surveyed"},
+      "segments": [
+        {"segment_id": "junction-to-crate", "start_node": "junction", "end_node": "yellow-crate", "landmark": "the yellow crate", "direction": "Take the approved side corridor", "instruction_template": "{direction} to {landmark} and stop beside it."},
+        {"segment_id": "crate-to-barrel", "start_node": "yellow-crate", "end_node": "blue-barrel", "landmark": "the blue barrel", "direction": "Turn right", "instruction_template": "{direction}, continue to {landmark}, and stop beside it."}
+      ]
+    }
+  ]
+}

@@ -42,6 +42,7 @@ Technical quality: separates NaVILA reasoning from a deterministic zero-velocity
 
 Presentation: makes the decision visible in a short simulation: navigate, trigger a temporary obstruction, stop, reroute, then verify or issue a ticket.
 
+
 Evidence and scope
 
 The World Health Organization estimates that 1.3 billion people, or 16% of the global population, experience significant disability: https://www.who.int/news-room/fact-sheets/detail/disability-and-health

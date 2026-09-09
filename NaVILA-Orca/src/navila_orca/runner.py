@@ -133,6 +133,8 @@ class NavigationRunner:
         ):
             raise TypeError("navigation_guard must provide an inspect method")
         self.navigation_guard = navigation_guard
+        self.current_state: RobotState | None = None
+        self.last_result: RunResult | None = None
         if not waypoint_instructions:
             self.waypoint_instructions: tuple[str, ...] = ()
         else:
@@ -182,11 +184,61 @@ class NavigationRunner:
         push_state(state, qpos_batch=qpos_batch)
         return True
 
+    def initialize_episode(self, episode: EpisodeSpec) -> RobotState:
+        """Initialize once; supervisors resume subsequent instructions in place."""
+        state = self.physics.reset(episode)
+        if self.locomotion_policy is not None:
+            self.locomotion_policy.reset()
+        self.current_state = state
+        return state
+
+    def capture_observation(self, state: RobotState):
+        """Capture without stepping physics or adding a training-history frame."""
+        return self._capture(state, record=False)
+
+    def stop(self) -> None:
+        """Latch zero velocity without stepping or resetting the simulation."""
+        if self._velocity_facade:
+            self.physics.set_velocity_command(VelocityCommand(0.0, 0.0, 0.0, 0.0))
+
     def run(
         self,
         episode: EpisodeSpec,
         *,
         resume_from_state: RobotState | None = None,
+        decision_budget: int | None = None,
+        control_budget: int | None = None,
+    ) -> RunResult:
+        self.last_result = None
+        self._run_control_steps = 0
+        self._run_decisions = 0
+        self._run_outputs: list[str] = []
+        self._run_motion_chunks: list[MotionChunkReport] = []
+        try:
+            self.last_result = self._run(
+                episode, resume_from_state=resume_from_state,
+                decision_budget=decision_budget, control_budget=control_budget,
+            )
+            return self.last_result
+        except Exception:
+            if self.current_state is not None:
+                # Preserve partial execution evidence without changing the
+                # existing exception contract for ordinary runner callers.
+                self.last_result = RunResult(
+                    {}, "execution_error", self._run_control_steps, self._run_decisions,
+                    tuple(self._run_outputs), tuple(self._run_motion_chunks), self.current_state,
+                )
+            raise
+        finally:
+            self.stop()
+
+    def _run(
+        self,
+        episode: EpisodeSpec,
+        *,
+        resume_from_state: RobotState | None = None,
+        decision_budget: int | None = None,
+        control_budget: int | None = None,
     ) -> RunResult:
         """Run one navigation instruction.
 
@@ -196,6 +248,15 @@ class NavigationRunner:
         state from this same physics backend.
         """
 
+        for budget in (decision_budget, control_budget):
+            if budget is not None and (isinstance(budget, bool) or int(budget) != budget or budget <= 0):
+                raise ValueError("remaining execution budgets must be positive integers")
+        max_decisions = self.max_decisions
+        if decision_budget is not None:
+            max_decisions = min(max_decisions, decision_budget) if max_decisions is not None else decision_budget
+        max_control_steps = self.max_control_steps
+        if control_budget is not None:
+            max_control_steps = min(max_control_steps, control_budget) if max_control_steps is not None else control_budget
         control_dt = float(self.physics.control_dt)
         capture_ticks = duration_to_ticks(self.image_interval_s, control_dt)
         stream_ticks = duration_to_ticks(self.state_stream_interval_s, control_dt)
@@ -216,11 +277,10 @@ class NavigationRunner:
             )
 
         if resume_from_state is None:
-            state = self.physics.reset(episode)
-            if self.locomotion_policy is not None:
-                self.locomotion_policy.reset()
+            state = self.initialize_episode(episode)
         else:
             state = resume_from_state
+        self.current_state = state
         metrics = NavigationMetrics(
             episode, state.root_pos_world, scene_fidelity=self.scene_fidelity
         )
@@ -228,8 +288,8 @@ class NavigationRunner:
         initial_frame = self._capture(state)
         frame_history = [initial_frame]
         last_frame = initial_frame
-        raw_outputs: list[str] = []
-        motion_chunks: list[MotionChunkReport] = []
+        raw_outputs = self._run_outputs
+        motion_chunks = self._run_motion_chunks
         control_steps = 0
         decisions = 0
         cumulative_forward_error_m = 0.0
@@ -304,10 +364,10 @@ class NavigationRunner:
             termination_reason = "route_blocked"
             monitor_output = decision.reason or "Route guard detected an obstruction"
             monitor_command = "safety stop"
-            if self._velocity_facade:
-                self.physics.set_velocity_command(
-                    VelocityCommand(0.0, 0.0, 0.0, 0.0)
-                )
+            self.stop()
+            on_blocked = getattr(self.navigation_guard, "on_blocked", None)
+            if callable(on_blocked):
+                on_blocked(images, current_state)
             print(
                 "ROUTE_BLOCKED "
                 f"obstacle={decision.obstacle_label!r} "
@@ -338,7 +398,7 @@ class NavigationRunner:
                 chunk_result=monitor_chunk_result,
             )
 
-        while self.max_decisions is None or decisions < self.max_decisions:
+        while max_decisions is None or decisions < max_decisions:
             if decisions:
                 current_instruction = active_instruction()
             sampled_images = sample_history(frame_history)
@@ -373,6 +433,7 @@ class NavigationRunner:
             )
             raw_outputs.append(raw_output)
             decisions += 1
+            self._run_decisions = decisions
             command = self.action_parser(raw_output)
             monitor_output = raw_output
             monitor_command = self._command_text(command)
@@ -476,8 +537,8 @@ class NavigationRunner:
             physics_done = False
             for _ in range(command_ticks):
                 if (
-                    self.max_control_steps is not None
-                    and control_steps >= self.max_control_steps
+                    max_control_steps is not None
+                    and control_steps >= max_control_steps
                 ):
                     termination_reason = "max_control_steps"
                     physics_done = True
@@ -507,7 +568,9 @@ class NavigationRunner:
                         "physics state step_id must increase monotonically"
                     )
                 state = step.state
+                self.current_state = state
                 control_steps += 1
+                self._run_control_steps = control_steps
                 executed_ticks += 1
                 auto_reset_state = bool(step.info.get("auto_reset_state", False))
                 if not ((step.terminated or step.truncated) and auto_reset_state):
@@ -598,8 +661,8 @@ class NavigationRunner:
 
             if (
                 not physics_done
-                and self.max_control_steps is not None
-                and control_steps >= self.max_control_steps
+                and max_control_steps is not None
+                and control_steps >= max_control_steps
             ):
                 termination_reason = "max_control_steps"
                 physics_done = True

@@ -1,0 +1,9 @@
+{
+  "destination": "blue-barrel",
+  "requester": "prototype operator",
+  "metadata": {"data_status": "synthetic_not_surveyed"},
+  "routes": [
+    {"id": "main-corridor", "priority": 1},
+    {"id": "side-corridor", "priority": 2}
+  ]
+}

@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .contracts import RouteEdge, RouteMap, RouteNode
+from .contracts import GuidedRoute, RouteCatalog, RouteEdge, RouteMap, RouteNode, RouteSegment
 
 
 def load_route_map(path: str | Path) -> RouteMap:
@@ -83,3 +83,25 @@ def _object_list(value: Any, field_name: str) -> list[dict[str, Any]]:
     if any(not isinstance(item, dict) for item in value):
         raise ValueError(f"route map field {field_name!r} must contain JSON objects")
     return value
+
+
+def load_route_catalog(path: str | Path) -> RouteCatalog:
+    """Load authored route sequences; membership here does not grant approval."""
+    try:
+        raw = json.loads(Path(path).expanduser().read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"cannot load route catalog {path}: {exc}") from exc
+    if not isinstance(raw, dict):
+        raise ValueError("route catalog must be an object")
+    nodes = tuple(RouteNode(n.get("id", ""), n.get("name", ""))
+                  for n in _object_list(raw.get("nodes"), "nodes"))
+    routes = []
+    try:
+        for route in _object_list(raw.get("routes"), "routes"):
+            segments = tuple(RouteSegment(**segment) for segment in
+                             _object_list(route.get("segments"), "segments"))
+            routes.append(GuidedRoute(route.get("id", ""), route.get("destination", ""),
+                                      segments, route.get("accessibility_metadata", {})))
+        return RouteCatalog(nodes, tuple(routes), raw.get("metadata", {}))
+    except TypeError as exc:
+        raise ValueError(f"invalid structured route catalog: {exc}") from exc
