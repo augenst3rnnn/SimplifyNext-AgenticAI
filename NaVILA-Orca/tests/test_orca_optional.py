@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-from contextlib import nullcontext
+from contextlib import contextmanager
 from types import SimpleNamespace
 
 import numpy as np
@@ -69,9 +69,19 @@ def test_reset_warmup_runs_zero_command_and_restores_queued_command() -> None:
     backend._obs = "obs-0"
     stepped_commands = []
     apply_calls = []
+    no_grad_events = []
+
+    @contextmanager
+    def no_grad():
+        no_grad_events.append("enter")
+        try:
+            yield
+        finally:
+            no_grad_events.append("exit")
 
     class _Env:
         def step(self, action):
+            assert no_grad_events == ["enter"]
             assert action == backend._obs
             stepped_commands.append(backend._velocity_command.copy())
             index = len(stepped_commands)
@@ -79,13 +89,14 @@ def test_reset_warmup_runs_zero_command_and_restores_queued_command() -> None:
 
     backend._env = _Env()
     backend._policy = lambda obs: obs
-    backend._torch = SimpleNamespace(inference_mode=nullcontext)
+    backend._torch = SimpleNamespace(no_grad=no_grad)
     backend._apply_velocity_command = lambda *, refresh_observation: apply_calls.append(
         (refresh_observation, backend._velocity_command.copy())
     )
 
     backend._run_zero_velocity_warmup()
 
+    assert no_grad_events == ["enter", "exit"]
     assert len(stepped_commands) == 3
     for command in stepped_commands:
         np.testing.assert_array_equal(command, [0.0, 0.0, 0.0])

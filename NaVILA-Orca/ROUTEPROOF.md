@@ -9,7 +9,8 @@ RouteProof is the outer decision-making loop around the existing NaVILA
 - `CLEAR`: let the normal NaVILA loop request and execute another action.
 - `BLOCKED`: issue a zero-velocity safety stop, save the latest RGB frame, and
   continue from the stopped robot state with the next pre-approved route.
-- `VERIFIED`: NaVILA returned `stop` for the selected route.
+- `VERIFIED`: in legacy mode, NaVILA returned `stop` for the selected route;
+  LiveGuide additionally requires explicit entry and all segment completions.
 - `NO_SAFE_ROUTE`: every approved route was blocked or failed, so write a local
   facilities-ticket JSON file with evidence paths and the robot position.
 
@@ -116,7 +117,8 @@ replace the robot's independent collision avoidance and emergency stop.
 
 ## Verification policy
 
-By default, a final NaVILA `stop` marks the route verified. This is useful while
+In legacy instruction-only mode, a final NaVILA `stop` marks the route verified.
+LiveGuide additionally requires explicit operator confirmations. This is useful while
 the current OrcaLab bridge reports `scene_fidelity = False`. When goal
 coordinates and collision geometry are reliable, add:
 
@@ -135,17 +137,30 @@ one Go2 open, with RPC endpoints on ports 50051/50151. The NaVILA TCP server or
 forward must be listening on 54321. This command uses the Python CLI directly
 and avoids the Windows checkout's CRLF Bash-launcher issue.
 
-The supplied routes are **synthetic demonstration data**, not a calibrated
-campus map. Both example routes begin at `junction`. Use them only in a scene
-where the operator can identify that starting junction and the red bin, yellow
-crate and blue barrel, or replace the catalog with authored scene-specific
-segments. Never acknowledge an entry that does not match the current position.
+The supplied routes preserve the VM-authored human-dummy layout, but remain
+**synthetic demonstration data, not surveyed or calibrated**. The plan and both
+catalog routes target `human-dummy`:
+
+- `main-corridor`: `robot-start` → `red-bucket` → `human-dummy`.
+- `side-corridor`: `red-bucket` → `silver-bucket` → `fire-extinguisher` →
+  `blue-bin` → `human-dummy` (no robot-start prefix).
+
+At primary entry, the robot faces the top of the reference image. At side entry,
+it must already be stopped beside the red bucket, with the bucket on its left
+and the same forward heading. Nodes denote operator-checked observation
+positions beside objects, not occupied object coordinates. Confirm position,
+heading and a safe observation position manually; no autonomous localization,
+measured clearance or human accessibility is inferred. Never acknowledge an
+entry that does not match the actual scene.
 
 ```bash
 PYTHONPATH=src python -m navila_orca.cli run \
   --render-backend orcalab \
   --vlm-backend tcp \
   --no-publish --robot-actor-name auto --anchor-existing-scene \
+  --camera-transport grpc-png --orcalab-camera-mode mujoco-png \
+  --camera-actor-name mujococamera1080 \
+  --camera-asset-path prefabs/mujococamera1080 \
   --routeproof-routes examples/liveguide_routes.json \
   --liveguide-catalog examples/liveguide_catalog.json \
   --routeproof-blockage-flag /tmp/routeproof-liveguide-blocked.json \
@@ -188,36 +203,47 @@ The event preserves all request fields (`request_id`, `activation_id`,
 within 120 seconds stops and escalates. Old progress files cannot acknowledge
 a new mission because each request/activation has a fresh ID.
 
-A clear two-segment route requests three confirmations: route entry, first
-segment completion, final segment completion. Its significant logs are:
+A clear primary route requests three confirmations: entry at `robot-start`,
+completion at `red-bucket`, then completion at `human-dummy`. Illustrative log
+excerpt (not live execution evidence):
 
 ```text
 ROUTEPROOF_ROUTE_SELECTED route_id=main-corridor
 LIVEGUIDE_ROUTE_STARTED route_id=main-corridor activation_id=...
 LIVEGUIDE_CONFIRMATION_REQUIRED {... "kind": "entry", ...}
 LIVEGUIDE_PROGRESS route_id=main-corridor ... kind=entry ... source='operator'
-LIVEGUIDE_SEGMENT route_id=main-corridor index=0 segment_id=junction-to-bin ...
-LIVEGUIDE_INSTRUCTION instruction='Continue forward to the red bin and stop beside it.'
+LIVEGUIDE_SEGMENT route_id=main-corridor index=0 segment_id=main-start-to-red-bucket from=robot-start to=red-bucket
+LIVEGUIDE_INSTRUCTION instruction='Continue forward until you see the red bucket ahead and slightly to your left. Keep one robot-width to its right and continue until the bucket is beside your left side. Stop there before proceeding to the next segment.'
 LIVEGUIDE_CONFIRMATION_REQUIRED {... "kind": "complete", ...}
 LIVEGUIDE_PROGRESS route_id=main-corridor ... kind=complete ...
-LIVEGUIDE_SEGMENT route_id=main-corridor index=1 segment_id=bin-to-barrel ...
-LIVEGUIDE_INSTRUCTION instruction='Turn right, continue to the blue barrel, and stop beside it.'
+LIVEGUIDE_SEGMENT route_id=main-corridor index=1 segment_id=main-red-bucket-to-human-dummy from=red-bucket to=human-dummy
+LIVEGUIDE_INSTRUCTION instruction='Turn slightly right and continue diagonally through the open aisle. Keep the silver bucket far to your left and pass to the left of the single cardboard box. Approach the human dummy beside the left end of the white partition and stop one robot-length before its head.'
 LIVEGUIDE_CONFIRMATION_REQUIRED {... "kind": "complete", ...}
 LIVEGUIDE_PROGRESS route_id=main-corridor ... kind=complete ...
 ROUTEPROOF_ROUTE_VERIFIED route_id=main-corridor
 ```
 
-`SCENE_REUSE_OK` and normal `MOTION_CHUNK` diagnostics also appear. To demonstrate
-a reroute with this example catalog, report a blockage **while still at the
-starting junction**, before acknowledging initial entry:
+`SCENE_REUSE_OK` and normal `MOTION_CHUNK` diagnostics also appear. For the reroute
+demo, acknowledge primary entry at `robot-start` and traverse the first segment
+with no blockage flag. Wait for NaVILA to **stop beside `red-bucket`** and for
+`kind=complete`, `segment_id=main-start-to-red-bucket`, `node_id=red-bucket` in
+the pending request. Check the actual position/heading. **Do not acknowledge this
+completion yet**: that would immediately release the next main segment. While
+stopped at this boundary, report a blockage of the onward path:
 
 ```bash
 printf '%s\n' '{"route_id":"main-corridor","obstacle":"delivery cart","event":1}' \
   > /tmp/routeproof-liveguide-blocked.json
 ```
 
-RouteProof stops, saves evidence and selects `side-corridor`. LiveGuide requires
-a new entry confirmation at `junction`; it does not move the robot there.
+The wait poll detects the blockage without a physics tick, keeps zero velocity,
+saves evidence and selects `side-corridor`. Blockage preempts the pending main
+completion (its confirmation flag remains false). LiveGuide requires a **new
+explicit entry confirmation at `red-bucket`** from the same stopped state; it
+does not move the robot there, reset pose or replay `robot-start`. Read the new
+request before using the confirmation command. The first alternate instruction
+is `side-red-bucket-to-silver-bucket`; each of its four segment completions also
+requires explicit confirmation. Never infer arrival from a stop or step count.
 
 ```text
 ROUTE_BLOCKED route_id=main-corridor ...
@@ -225,7 +251,7 @@ ROUTEPROOF_ROUTE_SELECTED route_id=side-corridor
 ROUTEPROOF_REROUTE from=main-corridor to=side-corridor
 LIVEGUIDE_ROUTE_STARTED route_id=side-corridor activation_id=...
 LIVEGUIDE_ROUTE_SWITCHED route_id=side-corridor step_id=...
-LIVEGUIDE_CONFIRMATION_REQUIRED {... "route_id": "side-corridor", "kind": "entry", ...}
+LIVEGUIDE_CONFIRMATION_REQUIRED {... "route_id": "side-corridor", "segment_id": "side-red-bucket-to-silver-bucket", "kind": "entry", "node_id": "red-bucket", ...}
 ```
 
 To demonstrate exhaustion, report a new blockage while awaiting that entry:
@@ -244,9 +270,21 @@ To start a later clear run, explicitly clear the demo obstruction:
 printf '%s\n' '{"blocked":false}' > /tmp/routeproof-liveguide-blocked.json
 ```
 
-Mid-segment blockage is supported as a stop, but this catalog provides no
-connector back to its starting junction. If the alternate cannot be entered
-from the current position, withhold entry confirmation and let the mission
-escalate. Add a separately approved route beginning at that actual location
-for a scene-specific moving-reroute demonstration. No pose-based completion or
-autonomous obstacle perception is claimed. See [LiveGuide limitations](docs/LIVE_GUIDE.md#prototype-boundaries).
+If blocked before reaching `red-bucket`, or after leaving that junction, stay
+stopped and **withhold side entry**. A stale `robot-start` event cannot confirm
+`red-bucket`; the wait times out and escalates. This catalog has no connector or
+backtracking route from an arbitrary corridor position. Manual confirmation is
+an operator assertion, not independent localization; a fabricated matching event
+would not establish actual arrival. No pose-based completion, autonomous obstacle
+perception or arbitrary-position safe reroute is claimed. See
+[LiveGuide limitations](docs/LIVE_GUIDE.md#prototype-boundaries).
+
+The packaged-data regression suite is explicitly **unit-test evidence**: real
+`RouteProofAgent`, `NavigationRunner`, session and flag-file adapters, but fake
+physics/camera, scripted VLM/operator and a fake clock for timeout. It covers the
+clear primary, stopped-junction reroute and pre-junction refusal/timeout. It is
+not evidence of OrcaLab movement, live NaVILA inference or physical accessibility:
+
+```bash
+PYTHONPATH=src python -m pytest tests/test_liveguide_scene_defaults.py -v
+```

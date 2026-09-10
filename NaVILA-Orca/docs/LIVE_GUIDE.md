@@ -122,12 +122,26 @@ For commands, manual event format and expected logs, see
 
 ## Prototype boundaries
 
-- The example catalog is synthetic, not surveyed or calibrated to an OrcaLab
-  scene. Its metadata is descriptive, not measured clearance or approval evidence.
-- The operator must confirm that the robot is **already at** the first node of
-  every selected route. There is no automatic node localization, mid-segment
-  connector, backtracking path or teleport. If the next route cannot be entered
-  from the actual stopped position, withhold confirmation and let it escalate.
+- The example catalog preserves the VM-authored human-dummy layout, but remains
+  **synthetic, not surveyed or calibrated**. Its metadata and object-relative
+  directions are not measured clearance or accessibility evidence.
+- `main-corridor` begins at `robot-start` (facing the top of the reference image),
+  stops beside `red-bucket`, then goes to `human-dummy`. `side-corridor` begins
+  at that `red-bucket` junction, continuing via `silver-bucket`,
+  `fire-extinguisher` and `blue-bin` to `human-dummy`; it does not replay the
+  robot-start prefix. Nodes mean operator-checked observation positions beside
+  objects, not their occupied coordinates.
+- The operator must confirm that the robot is **already at** each selected
+  route's start and correct heading. For this reroute demo, stop beside
+  `red-bucket` with the bucket on the robot's left, then report the next-segment
+  blockage while the first completion confirmation is still pending. Blockage
+  preempts that confirmation; a fresh explicit side-route entry is required at
+  the same stopped junction and forward heading. Do not acknowledge completion
+  first: that immediately releases the main route's next segment.
+- There is no autonomous node localization, mid-segment connector, backtracking
+  path or teleport. A stop before or beyond this junction cannot establish
+  `red-bucket` entry. Withhold alternate-entry confirmation and let the stopped
+  wait time out and escalate; arbitrary-corridor rerouting is not supported.
 - NaVILA `stop` is only a completion candidate. The operator must actually check
   arrival before confirming. No distance, elapsed time or motion count implies
   completion. A timeout does not grant approval.

@@ -527,7 +527,11 @@ class OrcaGrpcPngCamera:
         if self._loop is None:
             raise OrcaCameraError("gRPC PNG camera has not been started")
         asyncio.set_event_loop(self._loop)
-        return self._loop.run_until_complete(awaitable)
+        # Bound the RPC itself, not just the subsequent file-read retries.
+        # wait_for cancels and drains the request before raising TimeoutError.
+        return self._loop.run_until_complete(
+            asyncio.wait_for(awaitable, timeout=self.timeout_s)
+        )
 
     def start(self) -> None:
         if self._service is not None:

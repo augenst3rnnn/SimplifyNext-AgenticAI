@@ -149,6 +149,15 @@ class RouteProofAgent:
             self._latest_blockage_state = state
         return decision
 
+    def inspect_before_motion(
+        self,
+        images: Sequence[Image.Image],
+        state: RobotState,
+        instruction: str,
+    ) -> NavigationGuardDecision:
+        """Recheck mutable obstruction events even when the frame is unchanged."""
+        return self.inspect(images, state, instruction, force=True)
+
     def on_blocked(self, images: Sequence[Image.Image], state: RobotState) -> None:
         """Called after the runner latches zero velocity, before any reroute."""
         if self._current_evidence_path is None:

@@ -1,31 +1,99 @@
 {
   "metadata": {
     "data_status": "synthetic_not_surveyed",
-    "entry_policy": "Operator must confirm the robot is already at each selected route's start. No connector or scene localization is inferred."
+    "entry_policy": "Manual operator confirmation is required at each selected route start: main-corridor starts at robot-start, facing toward the top of the reference image; side-corridor starts at red-bucket, at the stopped main-corridor junction with the bucket beside the robot's left side and the same forward heading. Stop there before reporting a blockage of the next segment, while completion confirmation is pending. Confirm side-corridor entry only after checking the actual position and heading. If blocked before or beyond this junction, withhold alternate entry and wait for timeout/escalation; no connector, backtracking or autonomous scene localization is inferred. Object nodes denote operator-checked safe observation positions beside objects, not their occupied coordinates. This layout is synthetic_not_surveyed; no measured clearance or accessibility is claimed."
   },
   "nodes": [
-    {"id": "junction", "name": "Operator-identified starting junction"},
-    {"id": "red-bin", "name": "Red bin"},
-    {"id": "yellow-crate", "name": "Yellow crate"},
-    {"id": "blue-barrel", "name": "Blue barrel"}
+    {
+      "id": "robot-start",
+      "name": "White robot dog starting position"
+    },
+    {
+      "id": "red-bucket",
+      "name": "Red bucket"
+    },
+    {
+      "id": "silver-bucket",
+      "name": "Silver bucket"
+    },
+    {
+      "id": "human-dummy",
+      "name": "Human dummy"
+    },
+    {
+      "id": "fire-extinguisher",
+      "name": "Fire extinguisher"
+    },
+    {
+      "id": "blue-bin",
+      "name": "Blue bin"
+    }
   ],
   "routes": [
     {
       "id": "main-corridor",
-      "destination": "blue-barrel",
-      "accessibility_metadata": {"data_status": "synthetic_not_surveyed"},
+      "destination": "human-dummy",
+      "accessibility_metadata": {
+        "data_status": "synthetic_not_surveyed"
+      },
       "segments": [
-        {"segment_id": "junction-to-bin", "start_node": "junction", "end_node": "red-bin", "landmark": "the red bin", "direction": "Continue forward", "instruction_template": "{direction} to {landmark} and stop beside it."},
-        {"segment_id": "bin-to-barrel", "start_node": "red-bin", "end_node": "blue-barrel", "landmark": "the blue barrel", "direction": "Turn right", "instruction_template": "{direction}, continue to {landmark}, and stop beside it."}
+        {
+          "segment_id": "main-start-to-red-bucket",
+          "start_node": "robot-start",
+          "end_node": "red-bucket",
+          "landmark": "the red bucket",
+          "direction": "Continue forward",
+          "instruction_template": "{direction} until you see {landmark} ahead and slightly to your left. Keep one robot-width to its right and continue until the bucket is beside your left side. Stop there before proceeding to the next segment."
+        },
+        {
+          "segment_id": "main-red-bucket-to-human-dummy",
+          "start_node": "red-bucket",
+          "end_node": "human-dummy",
+          "landmark": "the human dummy beside the left end of the white partition",
+          "direction": "Turn slightly right",
+          "instruction_template": "{direction} and continue diagonally through the open aisle. Keep the silver bucket far to your left and pass to the left of the single cardboard box. Approach {landmark} and stop one robot-length before its head."
+        }
       ]
     },
     {
       "id": "side-corridor",
-      "destination": "blue-barrel",
-      "accessibility_metadata": {"data_status": "synthetic_not_surveyed"},
+      "destination": "human-dummy",
+      "accessibility_metadata": {
+        "data_status": "synthetic_not_surveyed"
+      },
       "segments": [
-        {"segment_id": "junction-to-crate", "start_node": "junction", "end_node": "yellow-crate", "landmark": "the yellow crate", "direction": "Take the approved side corridor", "instruction_template": "{direction} to {landmark} and stop beside it."},
-        {"segment_id": "crate-to-barrel", "start_node": "yellow-crate", "end_node": "blue-barrel", "landmark": "the blue barrel", "direction": "Turn right", "instruction_template": "{direction}, continue to {landmark}, and stop beside it."}
+        {
+          "segment_id": "side-red-bucket-to-silver-bucket",
+          "start_node": "red-bucket",
+          "end_node": "silver-bucket",
+          "landmark": "the silver bucket near the left wall",
+          "direction": "Continue forward and slightly left",
+          "instruction_template": "{direction} until you see {landmark}. Keep the bucket slightly to your left and stop when it is beside you."
+        },
+        {
+          "segment_id": "side-silver-bucket-to-fire-extinguisher",
+          "start_node": "silver-bucket",
+          "end_node": "fire-extinguisher",
+          "landmark": "the fire extinguisher lying near the green structure",
+          "direction": "Turn right and cross the upper open area",
+          "instruction_template": "{direction} until you see {landmark} ahead and slightly to your left. Approach it while maintaining a safe distance."
+        },
+        {
+          "segment_id": "side-fire-extinguisher-to-blue-bin",
+          "start_node": "fire-extinguisher",
+          "end_node": "blue-bin",
+          "landmark": "the upright blue bin",
+          "direction": "Turn slightly right",
+          "instruction_template": "{direction} and continue until you see {landmark} ahead and slightly to your right. Stop one robot-width before the bin."
+        },
+        {
+          "segment_id": "side-blue-bin-to-human-dummy",
+          "start_node": "blue-bin",
+          "end_node": "human-dummy",
+          "landmark": "the human dummy near the left end of the white partition",
+          "direction": "Turn sharply right and follow the upper side of the white partition",
+          "instruction_template": "{direction}. Keep the partition on your left as you travel toward {landmark}. Approach the dummy from its right side and stop one robot-length before its head."
+        }
       ]
     }
   ]

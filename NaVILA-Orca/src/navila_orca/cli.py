@@ -246,10 +246,19 @@ def _make_renderer(
         )
     camera_factory = None
     follower_factory = None
+    mujoco_camera = (
+        args.camera_transport == "grpc-png" and args.orcalab_camera_mode == "mujoco-png"
+    )
+    camera_actor_name = args.camera_actor_name
+    camera_asset_path = args.camera_asset_path
+    if camera_actor_name is None:
+        camera_actor_name = "mujococamera1080" if mujoco_camera else DEFAULT_CAMERA_ACTOR_NAME
+    if camera_asset_path is None:
+        camera_asset_path = "prefabs/mujococamera1080" if mujoco_camera else DEFAULT_CAMERA_ASSET
     if args.camera_transport == "grpc-png":
         camera_class = OrcaGrpcPngCamera
-        if args.orcalab_camera_mode == "mujoco-png":
-            camera_class = OrcaMujocoPngCamera
+        if mujoco_camera:
+            camera_class = partial(OrcaMujocoPngCamera, remote_camera_name=camera_actor_name)
             follower_factory = OrcaMujocoCameraFollower
         camera_factory = partial(
             camera_class,
@@ -287,8 +296,8 @@ def _make_renderer(
             aligned_xml_output=aligned_xml_output,
             bind_camera=not args.no_camera_bind,
             edit_address=args.orcalab_edit_address,
-            camera_actor_name=args.camera_actor_name,
-            camera_asset_path=args.camera_asset_path,
+            camera_actor_name=camera_actor_name,
+            camera_asset_path=camera_asset_path,
             camera_mount_position=args.camera_mount_position,
             camera_mount_quat_wxyz=args.camera_mount_quat_wxyz,
             stabilize_camera_horizon=args.stabilize_camera_horizon,
@@ -738,8 +747,10 @@ def _build_parser() -> argparse.ArgumentParser:
         default="grpc-png",
         help="RGB capture transport; grpc-png works with the current local OrcaStudio build",
     )
-    run.add_argument("--camera-actor-name", default=DEFAULT_CAMERA_ACTOR_NAME)
-    run.add_argument("--camera-asset-path", default=DEFAULT_CAMERA_ASSET)
+    run.add_argument("--camera-actor-name", default=None,
+                     help="actor to follow/capture (default: mujococamera1080 for mujoco-png, navila_ego otherwise)")
+    run.add_argument("--camera-asset-path", default=None,
+                     help="camera prefab (default: prefabs/mujococamera1080 for mujoco-png, prefabs/agentcamera otherwise)")
     run.add_argument(
         "--camera-mount-position",
         type=float,

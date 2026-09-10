@@ -98,13 +98,11 @@ class RouteAwareDetector:
         )
 
 
-class BlockOnSecondInspectionDetector:
-    def __init__(self):
-        self.inspections = 0
-
+class BlockOnFrame25Detector:
     def detect(self, images, *, route_id):
-        self.inspections += 1
-        blocked = self.inspections == 2
+        # FakeRenderer encodes physics step in RGB. Extra admission checks
+        # without a physics tick must not make the obstacle arrive earlier.
+        blocked = int(np.asarray(images[-1])[0, 0, 0]) >= 25
         return NavigationGuardDecision(
             blocked=blocked,
             obstacle_label="chair" if blocked else "unknown",
@@ -193,7 +191,7 @@ def test_no_safe_route_creates_ticket_with_evidence(tmp_path):
 
 
 def test_guard_interrupts_an_active_motion_chunk(tmp_path):
-    detector = BlockOnSecondInspectionDetector()
+    detector = BlockOnFrame25Detector()
     vlm = ScriptedVLM(["move forward 75 cm"])
     agent = RouteProofAgent(
         RoutePlan(

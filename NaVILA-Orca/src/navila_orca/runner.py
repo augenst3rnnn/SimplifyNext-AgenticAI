@@ -336,6 +336,8 @@ class NavigationRunner:
             current_state: RobotState,
             current_frame,
             instruction: str,
+            *,
+            before_motion: bool = False,
         ) -> bool:
             nonlocal blocking_guard_decision
             nonlocal last_guard_step_id
@@ -345,10 +347,17 @@ class NavigationRunner:
 
             if self.navigation_guard is None:
                 return False
-            if last_guard_step_id == current_state.step_id:
+            if not before_motion and last_guard_step_id == current_state.step_id:
                 return False
             last_guard_step_id = current_state.step_id
-            decision = self.navigation_guard.inspect(
+            inspect = self.navigation_guard.inspect
+            if before_motion:
+                # Stateful guards may invalidate their own same-frame cache.
+                # Ordinary NavigationGuard implementations need no new keyword.
+                admission_check = getattr(self.navigation_guard, "inspect_before_motion", None)
+                if callable(admission_check):
+                    inspect = admission_check
+            decision = inspect(
                 images,
                 current_state,
                 instruction,
@@ -402,6 +411,8 @@ class NavigationRunner:
             if decisions:
                 current_instruction = active_instruction()
             sampled_images = sample_history(frame_history)
+            if self.navigation_guard is not None:
+                self.stop()  # Do not leave the previous motion latched while waiting.
             if guard_blocks_route(
                 sampled_images,
                 state,
@@ -434,6 +445,12 @@ class NavigationRunner:
             raw_outputs.append(raw_output)
             decisions += 1
             self._run_decisions = decisions
+            # Operator events can arrive during inference without a physics tick.
+            # Revalidate before admitting even a model-reported stop/completion.
+            if guard_blocks_route(
+                sampled_images, state, last_frame, current_instruction, before_motion=True,
+            ):
+                break
             command = self.action_parser(raw_output)
             monitor_output = raw_output
             monitor_command = self._command_text(command)

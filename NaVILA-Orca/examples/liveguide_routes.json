@@ -1,5 +1,5 @@
 {
-  "destination": "blue-barrel",
+  "destination": "human-dummy",
   "requester": "prototype operator",
   "metadata": {"data_status": "synthetic_not_surveyed"},
   "routes": [
